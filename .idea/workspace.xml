@@ -23,16 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="600eb04f-e054-4131-a0c8-67fcaf0337a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flutter_application2/lib/login.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_application2/lib/myDB/login_user.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_application2/lib/sign_up.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/flut_2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flut_2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_application2/lib/addListeMesure.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/lib/dashboard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_application2/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_application2/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_application2/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_application2/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_application2/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_application2/lib/login.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

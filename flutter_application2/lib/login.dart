@@ -41,7 +41,7 @@ class LoginUserState extends State {
     var message = jsonDecode(response.body);
 
     // If the Response Message is Matched.
-    if(message == 'Connexion r&eacute;ussie')
+    if(message == 'Connexion réussie')
     {
 
       // Hiding the CircularProgressIndicator.
