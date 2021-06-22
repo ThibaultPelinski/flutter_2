@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/flutter_application2/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_application2/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_application2/build" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_application2/ios/.symlinks/plugins/path_provider/.pub" />
@@ -16,5 +17,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>
