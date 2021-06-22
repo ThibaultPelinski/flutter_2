@@ -28,5 +28,11 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>__dartobservatory._tcp</string>
+		<string>_googlecast._tcp</string>
+		<string>com.example.flutterApplication2._googlecast._tcp</string>
+	</array>
 </dict>
 </plist>

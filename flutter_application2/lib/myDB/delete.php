@@ -15,7 +15,7 @@
 //ou ça?? 
 require('config.php');
 
-$sql =  "DELETE FROM Mesure_Table WHERE id= $id";
+$sql =  "DELETE FROM Mesure_Table WHERE id= '".$id."'";
 
 $statement = $connect->prepare($query);
 
