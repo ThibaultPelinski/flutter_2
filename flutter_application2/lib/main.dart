@@ -15,8 +15,6 @@ class MyApp extends StatelessWidget {
  Widget build(BuildContext context) {
    return CupertinoApp(
      theme: CupertinoThemeData(
-      //  backgroundColor: Colors.white70,
-      //  primarySwatch: Colors.blue,
        brightness: Brightness.dark,
      ),
       debugShowCheckedModeBanner: false,
@@ -70,8 +68,7 @@ class _MyAppState extends State<Entry> {
     //     child :   Icon(Icons.sort)
     //  ),
       navigationBar: CupertinoNavigationBar( 
-       // title: Text("Flutter synthese"),
-          middle: Text('Cupertino Store'),
+          middle: Text('Detector'),
         ),
 
            child : FutureBuilder(
@@ -88,24 +85,43 @@ class _MyAppState extends State<Entry> {
                  return Center( 
                    child: Text("Erreur de chargement"),
                  );
-                 };
-                 
-           
-                  
+          }; 
             return ListView.builder(    
                    itemCount: snapshot.data.length,
                    itemBuilder: (context, index) {   
                       return  CupertinoListTile(
                        title: Text("Distance : ${snapshot.data[index]['heading']} cm"),
                        subtitle: Text("Date : ${snapshot.data[index]['body'] } "),
-                       trailing: Icon(CupertinoIcons.delete , semanticLabel: "Supprimer",),
+                       trailing: Icon(CupertinoIcons.delete , semanticLabel: "Bouton Supprimer",),
                        onTap: () {
-                         setState(() {
-                            var url = DELETE_URL;
-                             http.post(url, body: {'id' : snap[index]['id'] });
-                         });           
+                        //  setState(() {
+                        //     var url = DELETE_URL;
+                        //      http.post(url, body: {'id' : snap[index]['id'] });
+                        //  });  
+                        
+                        return showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: Text("Supprimer l'entrée"),
+                            content: Text("Êtes-vous sur de vouloir supprimer ?"),
+                            actions: <Widget>[
+                                CupertinoDialogAction(
+                                  child: Text("Supprimer"),
+                                  onPressed: () => setState(() {
+                                    var url = DELETE_URL;
+                                      http.post(url, body: {'id' : snap[index]['id'] });
+                                      Navigator.of(context).pop(true);
+                                  }) 
+                                ),
+                              CupertinoDialogAction(
+                                child: Text("Annuler"),
+                                  onPressed: () => Navigator.of(context).pop(false),
+                              ),
+                            ],
+                          ),
+                        );   
                        },
-                       );
+                    );
                    },                  
                  );
                }      
