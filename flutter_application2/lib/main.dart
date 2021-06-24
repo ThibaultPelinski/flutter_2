@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 //import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:cupertino_list_tile/cupertino_list_tile.dart';
 import 'dart:async';
+
+import 'package:sticky_headers/sticky_headers.dart';
 
 
 void main() => runApp(MyApp());
@@ -32,9 +36,12 @@ class Entry extends StatefulWidget {
 
 class _MyAppState extends State<Entry> {
 
+
    static const SHOW_URL = "http://marcel1968.hopto.org/mesure/show.php";
    static const DELETE_URL = "http://marcel1968.hopto.org/mesure/delete.php";
    static const ORDER_URL = "http://marcel1968.hopto.org/mesure/orderdesc.php";
+  
+  DateTime _dateTime = DateTime.now();
     
 
   Future  getAllMesures()async{
@@ -51,27 +58,38 @@ class _MyAppState extends State<Entry> {
       return reponseBody;
     }
 
-      Future order()async { 
+    Future order()async { 
       var theurl = ORDER_URL; 
       var res = await http.post(Uri.encodeFull(theurl),headers: {"Accept" : "application/json"});  
       var reponseBody = json.decode(res.body);
       return reponseBody;
     }
 
+    Future pickdate()async { 
+
+      final newDate = await showDatePicker(
+        context: context, 
+        initialDate: _dateTime, 
+        firstDate:  DateTime(DateTime.now().year - 5), 
+        lastDate: DateTime(DateTime.now().year + 5), 
+        );
+      // var theurl = ORDER_URL; 
+      // var res = await http.post(Uri.encodeFull(theurl),headers: {"Accept" : "application/json"});  
+      // var reponseBody = json.decode(res.body);
+      // return reponseBody;
+    }
+
+
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-    //   child: FloatingActionButton(          
-    //      onPressed: () {
-    //             order();  
-    //      },
-    //     child :   Icon(Icons.sort)
-    //  ),
+ 
       navigationBar: CupertinoNavigationBar( 
-          middle: Text('Detector'),
+          middle: Text('DetectUS'),
         ),
 
-           child : FutureBuilder(
+         child :  FutureBuilder(
              future: getAllMesures(),
              builder: (BuildContext context, AsyncSnapshot snapshot) {
                 List snap = snapshot.data;
@@ -85,20 +103,16 @@ class _MyAppState extends State<Entry> {
                  return Center( 
                    child: Text("Erreur de chargement"),
                  );
-          }; 
-            return ListView.builder(    
+               }; 
+          
+                 return ListView.builder(    
                    itemCount: snapshot.data.length,
                    itemBuilder: (context, index) {   
-                      return  CupertinoListTile(
+                        return CupertinoListTile(
                        title: Text("Distance : ${snapshot.data[index]['heading']} cm"),
                        subtitle: Text("Date : ${snapshot.data[index]['body'] } "),
-                       trailing: Icon(CupertinoIcons.delete , semanticLabel: "Bouton Supprimer",),
+                       trailing: Icon(CupertinoIcons.delete, semanticLabel: "Bouton Supprimer",),
                        onTap: () {
-                        //  setState(() {
-                        //     var url = DELETE_URL;
-                        //      http.post(url, body: {'id' : snap[index]['id'] });
-                        //  });  
-                        
                         return showCupertinoDialog(
                           context: context,
                           builder: (context) => CupertinoAlertDialog(
@@ -123,7 +137,7 @@ class _MyAppState extends State<Entry> {
                        },
                     );
                    },                  
-                 );
+                );
                }      
            ),
      );

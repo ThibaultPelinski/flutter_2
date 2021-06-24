@@ -1,4 +1,4 @@
-# flutter_application2
+# DetectUS
 
 A new Flutter project.
 

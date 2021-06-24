@@ -1,4 +1,4 @@
-name: flutter_application2
+name: DetectUs
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_launcher_icons: ^0.9.0
   sticky_headers: any
   flutter_app_host: ^0.2.1
   flutter:
@@ -39,6 +40,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  image_path_ios: "assets/images/icon.png"
+  image_path_android: "assets/images/icon.png"
+  image_path: "assets/images/icon.png"
+  ios: true
+  android: true
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -49,6 +58,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
