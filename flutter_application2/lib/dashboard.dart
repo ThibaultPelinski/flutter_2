@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'login.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatelessWidget {
 
 // Creating String Var to Hold sent Email.
@@ -17,6 +18,11 @@ class Dashboard extends StatelessWidget {
 
   }
 
+  List<Widget> _pages = [
+    FrontPage(), // see the FrontPage class
+    SettingsPage() // see the SettingsPage class
+  ];
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -24,25 +30,37 @@ class Dashboard extends StatelessWidget {
           middle: Text('Dashboard'),
         ),
         child: Center(
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    width: 280,
-                    padding: EdgeInsets.all(50.0),
-                    child: Text('Bienvenue ' + username,
-                        style: TextStyle(fontSize: 20))
-                ),
-
-                TextButton(
-                  onPressed: () {
-                    logout(context);
-                  },
-                  child: Text('Cliquer pour vous deconnectez'),
-                ),
-
-              ],
+              child: CupertinoTabScaffold(
+                  tabBar: CupertinoTabBar(
+                    items: [
+                      BottomNavigationBarItem(icon: Icon(Icons.home)),
+                      BottomNavigationBarItem(icon: Icon(Icons.graphic_eq))
+                    ],
+                  ),
+                  tabBuilder: (BuildContext context, index) {
+                    return _pages[index];
+                  }),
             )
-        )
+    );
+  }
+}
+
+class FrontPage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Bienvenue '),
+    );
+  }
+}
+
+// Settings Page
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Settings'),
     );
   }
 }

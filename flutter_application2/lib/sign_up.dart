@@ -50,27 +50,47 @@ class SignUserState extends State {
       });
     }
 
-    // Showing Alert Dialog with Response JSON Message.
-    showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text(message),
-          actions: <Widget>[
-            // Close the dialog
-            CupertinoDialogAction(
-                child: Text('Ok'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(builder: (context) => LoginUser())
-                  );
-                }),
-          ],
-        );
-      },
-    );
-
+    if(message == 'Utilisateur enregistré avec succès !') {
+      // Showing Alert Dialog with Response JSON Message.
+      showCupertinoDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(message),
+            actions: <Widget>[
+              // Close the dialog
+              CupertinoDialogAction(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(builder: (context) => LoginUser())
+                    );
+                  }),
+            ],
+          );
+        },
+      );
+    }
+    else {
+      showCupertinoDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(message),
+            actions: <Widget>[
+              // Close the dialog
+              CupertinoDialogAction(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
