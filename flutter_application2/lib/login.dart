@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dashboard.dart';
 import 'sign_up.dart';
+import 'package:flutter/cupertino.dart';
 
 class LoginUser extends StatefulWidget {
   LoginUserState createState() => LoginUserState();
@@ -35,10 +36,10 @@ class LoginUserState extends State {
     var data = {'username': username, 'mdp' : mdp};
 
     // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(url, body: data);
 
     // Getting Server response into variable.
-    var message = jsonDecode(response.body);
+    var message = json.decode(response.body);
 
     // If the Response Message is Matched.
     if(message == 'Connexion réussie')
@@ -51,7 +52,7 @@ class LoginUserState extends State {
 
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(username: usernameController.text))
       );
 
     } else{
@@ -66,7 +67,7 @@ class LoginUserState extends State {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return CupertinoAlertDialog(
             title: new Text(message),
             actions: <Widget>[
               TextButton(
@@ -82,76 +83,65 @@ class LoginUserState extends State {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+    return CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('Connexion'),
+        ),
+      child: Center(
+        child: ListView(
+          children: <Widget>[
+            Container(
+                width: 280,
+                padding: EdgeInsets.only(top: 70.0, left: 22.0, right: 22.0),
+                child: CupertinoTextField(
+                  controller: usernameController,
+                  padding: EdgeInsets.all(20.0),
+                  placeholder: 'Nom d\'utilisateur',
+                  autocorrect: true,
+                )
+            ),
 
-                  Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text('Connexion',
-                          style: TextStyle(fontSize: 21))),
+            Container(
+                width: 100,
+                padding: EdgeInsets.all(22.0),
+                child: CupertinoTextField(
+                  controller: passwordController,
+                  padding: EdgeInsets.all(20.0),
+                  placeholder: 'Mot de passe',
+                  autocorrect: true,
+                  obscureText: true,
+                )
+            ),
 
-                  Divider(),
-
-                  Container(
-                      width: 280,
-                      padding: EdgeInsets.all(2.0),
-                      child: TextField(
-                        controller: usernameController,
-                        autocorrect: true,
-                        decoration: new InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(10.0),
-                            ),
-                          ),
-                          labelText: 'Nom utilisateur',
-                          hintText: 'Entrer votre nom utilisateur',
-                        ),
-                      )
-                  ),
-
-                  Container(
-                      width: 280,
-                      padding: EdgeInsets.all(2.0),
-                      child: TextField(
-                        controller: passwordController,
-                        autocorrect: true,
-                        obscureText: true,
-                        decoration: new InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(10.0),
-                            ),
-                          ),
-                          labelText: 'Mot de passe',
-                          hintText: 'Entrer votre mot de passe',
-                        ),
-                      )
-                  ),
-
-                  ElevatedButton(
-                    onPressed: userLogin,
-                    child: Text('Connexion'),
-                  ),
-
-                  Visibility(
-                      visible: visible,
-                      child: Container(
-                          margin: EdgeInsets.only(bottom: 30),
-                          child: CircularProgressIndicator()
-                      )
-                  ),
-
-                  TextButton(onPressed: userSignUp, child: Text('Vous n\'êtes pas encore inscrit ?'))
-
-                ],
+            Container(
+              width: 100,
+              padding: EdgeInsets.only(top: 30.0, right: 50.0, left: 50.0, bottom: 20.0),
+              child: CupertinoButton.filled(
+                onPressed: userLogin,
+                minSize: 10.0,
+                padding: EdgeInsets.all(13.0),
+                borderRadius: new BorderRadius.circular(10.0),
+                child: Text('Connexion'),
               ),
-            )));
+            ),
+
+            Visibility(
+                visible: visible,
+                child: Container(
+                    margin: EdgeInsets.only(bottom: 30),
+                    child: CupertinoActivityIndicator()
+                )
+            ),
+
+            CupertinoButton(
+                onPressed: userSignUp,
+                child: Text('Vous n\'êtes pas encore inscrit ?')
+            )
+          ],
+        ),
+      )
+    );
   }
 }
