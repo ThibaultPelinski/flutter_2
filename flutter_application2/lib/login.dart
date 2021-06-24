@@ -17,7 +17,7 @@ class LoginUserState extends State {
   Future userSignUp() async{
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SignUp())
+        CupertinoPageRoute(builder: (context) => SignUp())
     );
   }
 
@@ -52,7 +52,7 @@ class LoginUserState extends State {
 
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Dashboard(username: usernameController.text))
+          CupertinoPageRoute(builder: (context) => Dashboard(username: usernameController.text))
       );
 
     } else{
@@ -64,7 +64,7 @@ class LoginUserState extends State {
       });
 
       // Showing Alert Dialog with Response JSON Message.
-      showDialog(
+      showCupertinoDialog(
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(

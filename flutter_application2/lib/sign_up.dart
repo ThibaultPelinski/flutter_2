@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -16,7 +16,7 @@ class SignUserState extends State {
   Future userLogin() async{
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginUser())
+        CupertinoPageRoute(builder: (context) => LoginUser())
     );
   }
 
@@ -35,7 +35,7 @@ class SignUserState extends State {
     var url = 'http://marcel1968.hopto.org/mesure/register.php';
 
     // Store all data with Param Name.
-    var data = {'username': name, 'mdp' : password};
+    var data = {'username': name, 'mdp' : password };
 
     // Starting Web API Call.
     var response = await http.post(url, body: data);
@@ -51,7 +51,7 @@ class SignUserState extends State {
     }
 
     // Showing Alert Dialog with Response JSON Message.
-    return showDialog<void>(
+    showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
@@ -63,7 +63,7 @@ class SignUserState extends State {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginUser())
+                      CupertinoPageRoute(builder: (context) => LoginUser())
                   );
                 }),
           ],
